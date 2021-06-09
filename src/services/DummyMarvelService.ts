@@ -1,4 +1,4 @@
-import { Service } from "@tsed/di";
+import {  Service } from "@tsed/di";
 import { IMarvelCharacterData } from "./IMarvelCharacterData";
 import { IMarvelService } from "./IMarvelService";
 

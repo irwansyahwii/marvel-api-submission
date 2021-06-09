@@ -1,17 +1,23 @@
-import { IOverwriteFileService } from "src/services/IOverwriteFileService";
-import { IMarvelAPIService } from "src/services/IMarvelAPIService";
+import { IOverwriteFileService, OverwriteFileService } from "../services/IOverwriteFileService";
+import { IMarvelAPIService, MarvelAPIService } from "../services/IMarvelAPIService";
 import { Timepoint } from "../services/Timepoint";
 import { IMarvelCacheFormat } from "./IMarvelCacheFormat";
-import { ITimer } from "./ITimer";
+import { ITimer, Timer } from "./ITimer";
 import { MarvelCharactersDownloader } from "./MarvelCharactersDownloader";
+import { inject, injectable } from "tsyringe";
 
 const T8HoursMilliseconds = 8*60*60*1000
 
+@injectable()
 export class MarvelCacheUpdater{
-    private _downloader:MarvelCharactersDownloader;
+    
 
-    constructor(apiService: IMarvelAPIService, private _timer:ITimer, private _fileService:IOverwriteFileService){
-        this._downloader = new MarvelCharactersDownloader(apiService);
+    constructor(
+        @inject(MarvelAPIService) apiService: IMarvelAPIService, 
+        @inject(Timer) private _timer:ITimer, 
+        @inject(OverwriteFileService) private _fileService:IOverwriteFileService,
+        private _downloader:MarvelCharactersDownloader){
+
     }
 
     protected async downloadAllCharacters():Promise<void>{
@@ -34,6 +40,9 @@ export class MarvelCacheUpdater{
 
     }
 
+    /**
+     * TODO: add debug logger
+     */
     async Start():Promise<void>{        
         try {
             await this.downloadAllCharacters();            

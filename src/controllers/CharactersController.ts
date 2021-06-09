@@ -1,8 +1,7 @@
-import {Controller, Get, Inject, PathParams} from "@tsed/common";
+import {Controller, Get, PathParams} from "@tsed/common";
 import {  Summary } from "@tsed/schema";
-import { MarvelAPIService } from "src/services/IMarvelAPIService";
 import { IMarvelCharacterData } from "src/services/IMarvelCharacterData";
-import { IMarvelService } from "src/services/IMarvelService";
+import { DummyMarvelService } from "../services/DummyMarvelService";
 
 export interface IAPIResult{
     errors: string[];
@@ -21,7 +20,7 @@ export interface IGetCharacterByIdResult extends IAPIResult{
 @Controller("/characters")
 export class CharactersController {
 
-    constructor(@Inject(MarvelAPIService) private _marvelService: IMarvelService){
+    constructor(private _marvelService: DummyMarvelService){
 
     }
 

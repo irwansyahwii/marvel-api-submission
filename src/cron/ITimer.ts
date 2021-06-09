@@ -1,4 +1,4 @@
-
+export const Timer = Symbol("Timer");
 
 export interface ITimer{
     Start(cb:()=>Promise<void>):Promise<void>;

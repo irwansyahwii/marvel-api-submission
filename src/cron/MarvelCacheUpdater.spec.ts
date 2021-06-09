@@ -6,6 +6,7 @@ import { Timepoint } from "../services/Timepoint";
 import { IMarvelCacheFormat } from "./IMarvelCacheFormat";
 import { ITimer } from "./ITimer";
 import { MarvelCacheUpdater } from "./MarvelCacheUpdater"
+import { MarvelCharactersDownloader } from "./MarvelCharactersDownloader";
 
 
 
@@ -38,7 +39,7 @@ test('Start() set the timer interval very 8 hours', async ()=>{
         Overwrite: jest.fn()
     }
     
-    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService);
+    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService, new MarvelCharactersDownloader(mockAPIService));
 
     await updater.Start();
 
@@ -73,7 +74,7 @@ test('Start() will call timer.Start()',async ()=>{
         Overwrite: jest.fn()
     }
     
-    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService);
+    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService, new MarvelCharactersDownloader(mockAPIService));
 
     await updater.Start();
 
@@ -111,7 +112,7 @@ test('Start() will setup the timer to call downloadAllCharacters()',async ()=>{
         Overwrite: jest.fn()
     }
     
-    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService);
+    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService, new MarvelCharactersDownloader(mockAPIService));
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (updater as any).downloadAllCharacters = jest.fn();
@@ -159,7 +160,7 @@ test('Start() will overwrite two files consecutively', async ()=>{
         Overwrite: jest.fn()
     }
     
-    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService);
+    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService, new MarvelCharactersDownloader(mockAPIService));
 
 
     await updater.Start();
@@ -216,7 +217,7 @@ test('Start() will log error when downloading characters failed', async ()=>{
         Overwrite: jest.fn()
     }
     
-    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService);
+    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService, new MarvelCharactersDownloader(mockAPIService));
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (updater as any).downloadAllCharacters = jest.fn(()=> {
@@ -248,7 +249,7 @@ test('Stop() will call timer.Stop()', ()=>{
         Overwrite: jest.fn()
     }
     
-    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService);
+    const updater = new MarvelCacheUpdater(mockAPIService, mockTimer, mockFileService, new MarvelCharactersDownloader(mockAPIService));
 
     updater.Stop();
 

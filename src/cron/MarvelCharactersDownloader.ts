@@ -1,6 +1,8 @@
-import { IMarvelAPIService } from "src/services/IMarvelAPIService";
-import { IMarvelCharacterData } from "src/services/IMarvelCharacterData";
+import { IMarvelAPIService, MarvelAPIService } from "../services/IMarvelAPIService";
+import { IMarvelCharacterData } from "../services/IMarvelCharacterData";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class MarvelCharactersDownloader{
     async DownloadCharacters():Promise<IMarvelCharacterData[]> {
         let offset = 0;
@@ -18,7 +20,7 @@ export class MarvelCharactersDownloader{
         }
         return Promise.resolve(result);
     }
-    constructor(private _marvelAPIService: IMarvelAPIService){
+    constructor(@inject(MarvelAPIService) private _marvelAPIService: IMarvelAPIService){
 
     }
 }

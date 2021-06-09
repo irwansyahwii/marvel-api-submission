@@ -1,17 +1,18 @@
-const marvelApi = require("marvel-api")
+import "reflect-metadata";
+import { assert } from "console";
+import { container } from "tsyringe";
+import { MarvelCacheUpdater } from "./MarvelCacheUpdater";
+import { CompositionRoot } from "./CompositionRoot";
 
-const envresult = require('dotenv').config({path:'./production.env', debug:true});
+require('dotenv').config({path:'./production.env', debug:true});
+assert(process.env.MARVEL_publicKey !== undefined, "process.env.MARVEL_publicKey is undefined");
+assert(process.env.MARVEL_privateKey !== undefined, "process.env.MARVEL_privateKey is undefined");
 
-console.log(envresult);
+CompositionRoot.ComposeApplication();
 
-console.log('process.env.MARVEL_publicKey:', process.env.MARVEL_publicKey)
+const cacheUpdater = container.resolve<MarvelCacheUpdater>(MarvelCacheUpdater);
 
-const marvel = marvelApi.createClient({
-    publicKey: process.env.MARVEL_publicKey
-  , privateKey: process.env.MARVEL_privateKey
-  });
-
-  marvel.characters.findAll(100, 99)
-  .then(console.log)
-  .fail(console.error)
-  .done();
+cacheUpdater.Start()
+  .catch(err => {
+    console.error(err);
+  })
