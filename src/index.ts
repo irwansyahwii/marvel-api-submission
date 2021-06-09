@@ -1,6 +1,9 @@
 import {$log} from "@tsed/common";
 import { PlatformExpress } from "@tsed/platform-express";
 import {Server} from "./Server";
+import { CompositionRoot } from "./services/CompositionRoot";
+
+CompositionRoot.ComposeApplication();
 
 async function bootstrap() {
   try {

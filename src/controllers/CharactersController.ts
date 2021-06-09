@@ -1,33 +1,52 @@
-import {Controller, Get, QueryParams} from "@tsed/common";
-import { Description, Summary } from "@tsed/schema";
+import {Controller, Get, Inject, PathParams} from "@tsed/common";
+import {  Summary } from "@tsed/schema";
+import { MarvelAPIService } from "src/services/IMarvelAPIService";
+import { IMarvelCharacterData } from "src/services/IMarvelCharacterData";
+import { IMarvelService } from "src/services/IMarvelService";
 
+export interface IAPIResult{
+    errors: string[];
+}
 
-export interface IFindAllCharactersResult{
-    meta:{
-        offset: number;
-        limit: number;
-        total: number;
-        count: number;    
-    }
+export interface IFindAllCharactersResult extends IAPIResult{
     data: string[];
+    
+}
+
+export interface IGetCharacterByIdResult extends IAPIResult{
+    data: IMarvelCharacterData | null;
+    
 }
 
 @Controller("/characters")
 export class CharactersController {
 
-  @Get("/")
-  @Summary(`Serve an endpoint /characters that returns all the Marvel character ids in a JSON array of numbers.`)
-  findAll(
-      
-        @Description("An integer value to start retrieving the data. Defaults to 0")
-        @QueryParams("offset") offset:number, 
+    constructor(@Inject(MarvelAPIService) private _marvelService: IMarvelService){
 
-        @Description("An integer value specifying the maximum data to be returned. Defaults to 20")
-        @QueryParams("limit") limit: number):Promise<IFindAllCharactersResult> {
+    }
 
-        offset = offset || 0;
-        limit = limit || 20;
+    @Get("/")
+    @Summary(`Serve an endpoint /characters that returns all the Marvel character ids in a JSON array of numbers.`)
+    async findAll():Promise<IFindAllCharactersResult> {
 
-        return Promise.resolve({meta:{offset, limit, total:345, count:567}, data:["1212", "1212"]});
-  }
+        try {
+            const ids = await this._marvelService.GetAllCharactersIds();
+            return {data: ids, errors:[]}                
+        } catch (error) {
+            return {data: [], errors:[error]}
+        }
+    }
+
+    @Get("/:id")
+    @Summary(`Serve an endpoint /characters/{characterId} that returns only the id, name and description of the character.`)
+    async getCharacterById(@PathParams("id") id: number):Promise<IGetCharacterByIdResult> {
+
+        try {
+            const character = await this._marvelService.GetCharacterById(id)
+            return {data: character, errors:[]}
+                    
+        } catch (error) {
+            return {data: null, errors:[error]}
+        }
+    }
 }

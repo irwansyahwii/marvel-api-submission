@@ -12,7 +12,8 @@
     "test:unit": "cross-env NODE_ENV=test jest",
     "test:coverage": "yarn run test:unit",
     "test:lint": "eslint src --ext .ts",
-    "test:lint:fix": "eslint src --ext .ts --fix"
+    "test:lint:fix": "eslint src --ext .ts --fix",
+    "cron": "ts-node ./src/cron"
   },
   "dependencies": {
     "@tsed/ajv": "^6.54.0",

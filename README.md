@@ -24,3 +24,15 @@ $ yarn start:prod
 Since Marvel mentioned in their web site that they usuallu updates the data every 24 hours so I created a cron that will download all the characters data into a json file and put a timestamp into it. The cron will redownload the data every 8 hours. For fast lookup, the cron also created another file containing only the timestamp so the web server can look it up to see if the file has been updated.
 
 The file will be loaded to the memory when the web server started. And every time there is an API request, the server will reload the json file every 5 minutes to make sure we will always have the latest data in 5 minutes window.
+
+## Cron Characters Downloader
+As stated in the **Caching Strategy** section, the cron needs to run first so it can download all the characters and save it to a file.
+
+```batch
+# install ts-node globally
+$ npm install -g ts-node
+
+# run
+$ yarn cron
+
+```
