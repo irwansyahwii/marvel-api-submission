@@ -1,4 +1,4 @@
-import { IFileService } from "src/services/IFileService";
+import { IOverwriteFileService } from "src/services/IOverwriteFileService";
 import { IMarvelAPIService } from "src/services/IMarvelAPIService";
 import { Timepoint } from "../services/Timepoint";
 import { IMarvelCacheFormat } from "./IMarvelCacheFormat";
@@ -10,7 +10,7 @@ const T8HoursMilliseconds = 8*60*60*1000
 export class MarvelCacheUpdater{
     private _downloader:MarvelCharactersDownloader;
 
-    constructor(apiService: IMarvelAPIService, private _timer:ITimer, private _fileService:IFileService){
+    constructor(apiService: IMarvelAPIService, private _timer:ITimer, private _fileService:IOverwriteFileService){
         this._downloader = new MarvelCharactersDownloader(apiService);
     }
 

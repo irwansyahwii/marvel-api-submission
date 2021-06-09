@@ -24,6 +24,7 @@
     "@tsed/platform-express": "^6.54.0",
     "@tsed/schema": "^6.54.0",
     "@tsed/swagger": "^6.54.0",
+    "@types/write": "^2.0.0",
     "ajv": "7.2.4",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
@@ -33,7 +34,9 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "marvel-api": "^1.1.0",
-    "method-override": "^3.0.0"
+    "method-override": "^3.0.0",
+    "read-text-file": "^1.1.0",
+    "write": "^2.0.0"
   },
   "devDependencies": {
     "@tsed/cli-plugin-eslint": "3.1.2",

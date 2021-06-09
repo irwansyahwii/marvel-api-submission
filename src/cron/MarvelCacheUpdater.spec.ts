@@ -1,4 +1,4 @@
-import { IFileService } from "src/services/IFileService";
+import { IOverwriteFileService } from "src/services/IOverwriteFileService";
 import { IMarvelAPIResult } from "src/services/IMarvelAPIResult";
 import { IMarvelAPIService } from "src/services/IMarvelAPIService"
 import { IMarvelCharacterData } from "src/services/IMarvelCharacterData";
@@ -34,7 +34,7 @@ test('Start() set the timer interval very 8 hours', async ()=>{
         IntervalValue: 10
     }
 
-    const mockFileService: IFileService = {
+    const mockFileService: IOverwriteFileService = {
         Overwrite: jest.fn()
     }
     
@@ -69,7 +69,7 @@ test('Start() will call timer.Start()',async ()=>{
         IntervalValue: 10
     }
 
-    const mockFileService: IFileService = {
+    const mockFileService: IOverwriteFileService = {
         Overwrite: jest.fn()
     }
     
@@ -107,7 +107,7 @@ test('Start() will setup the timer to call downloadAllCharacters()',async ()=>{
         IntervalValue: 10
     }
 
-    const mockFileService: IFileService = {
+    const mockFileService: IOverwriteFileService = {
         Overwrite: jest.fn()
     }
     
@@ -155,7 +155,7 @@ test('Start() will overwrite two files consecutively', async ()=>{
         IntervalValue: 10
     }
 
-    const mockFileService: IFileService = {
+    const mockFileService: IOverwriteFileService = {
         Overwrite: jest.fn()
     }
     
@@ -212,7 +212,7 @@ test('Start() will log error when downloading characters failed', async ()=>{
         IntervalValue: 10
     }
 
-    const mockFileService: IFileService = {
+    const mockFileService: IOverwriteFileService = {
         Overwrite: jest.fn()
     }
     
@@ -244,7 +244,7 @@ test('Stop() will call timer.Stop()', ()=>{
         IntervalValue: 10
     }
 
-    const mockFileService: IFileService = {
+    const mockFileService: IOverwriteFileService = {
         Overwrite: jest.fn()
     }
     
