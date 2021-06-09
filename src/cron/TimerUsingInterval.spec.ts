@@ -59,3 +59,9 @@ test('Start() will call the callback function', async ()=>{
 
     expect(mockFn).toBeCalledTimes(1);
 })
+
+test('Stop() without Start() will not throw any error', ()=>{
+    const t = new TimerUsingSetinterval();
+
+    t.Stop();
+})

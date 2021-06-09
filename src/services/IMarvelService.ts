@@ -1,6 +1,6 @@
 import { IMarvelCharacterData } from "./IMarvelCharacterData";
 
 export interface IMarvelService{
-    GetAllCharactersIds():Promise<string[]>;
+    GetAllCharactersIds():Promise<number[]>;
     GetCharacterById(characterId:number): Promise<IMarvelCharacterData | null>;
 }

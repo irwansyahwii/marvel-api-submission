@@ -7,6 +7,7 @@ const marvelApi = require("marvel-api")
 
 
 export class MarvelAPIServiceUsingMarvelAPIModule implements IMarvelAPIService {
+    
     async findAll(count: number, offset: number): Promise<IMarvelAPIResult> {
         const marvel = marvelApi.createClient({
             publicKey: process.env.MARVEL_publicKey

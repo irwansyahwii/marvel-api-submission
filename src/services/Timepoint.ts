@@ -1,3 +1,5 @@
+const isBefore = require("compare-dates").isBefore;
+
 export class Timepoint{
     static From(date: Date): Timepoint {
         if(!date){
@@ -18,4 +20,10 @@ export class Timepoint{
         return new Timepoint(new Date());
     }
 
+
+    public IsOlderThan(other:Timepoint):boolean{
+        const result = isBefore(this._date, other.Date);
+
+        return result;
+    }
 }

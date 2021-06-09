@@ -1,14 +1,14 @@
 import {Controller, Get, PathParams} from "@tsed/common";
 import {  Summary } from "@tsed/schema";
-import { IMarvelCharacterData } from "src/services/IMarvelCharacterData";
-import { DummyMarvelService } from "../services/DummyMarvelService";
+import { IMarvelCharacterData } from "../services/IMarvelCharacterData";
+import { MarvelServiceUsingPlatformCache } from "../services/MarvelServiceUsingPlatformCache";
 
 export interface IAPIResult{
     errors: string[];
 }
 
 export interface IFindAllCharactersResult extends IAPIResult{
-    data: string[];
+    data: number[];
     
 }
 
@@ -20,7 +20,7 @@ export interface IGetCharacterByIdResult extends IAPIResult{
 @Controller("/characters")
 export class CharactersController {
 
-    constructor(private _marvelService: DummyMarvelService){
+    constructor(private _marvelService: MarvelServiceUsingPlatformCache){
 
     }
 

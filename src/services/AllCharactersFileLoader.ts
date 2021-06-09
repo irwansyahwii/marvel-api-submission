@@ -5,8 +5,13 @@ import readTextFile = require("read-text-file");
 import { IMarvelCacheFormatRaw } from "src/cron/IMarvelCacheFormatRaw";
 import { Timepoint } from "./Timepoint";
 import { IMarvelTimestampFormatRaw } from "src/cron/IMarvelTimestampFormatRaw";
+import { assert } from "console";
+
+export const AllCharactersFilePath = "allcharacters.json";
+export const LatestTimestampFilePath = "latesttimestamp.json";
 
 export class AllCharactersFileLoader{
+    
     public static CacheData:IMarvelCacheFormat | null = null;
     public static LastTimestamp: IMarvelTimestampFormat | null = null;
 
@@ -23,6 +28,9 @@ export class AllCharactersFileLoader{
 
         AllCharactersFileLoader.CacheData = allCharacters;
 
+        assert(AllCharactersFileLoader !== undefined)
+        assert(AllCharactersFileLoader !== null)
+
         await AllCharactersFileLoader.ReloadTimestamp(timestampFilePath)
     }
 
@@ -34,5 +42,8 @@ export class AllCharactersFileLoader{
         }
 
         AllCharactersFileLoader.LastTimestamp = timestamp;
+
+        assert(AllCharactersFileLoader.LastTimestamp !== undefined);
+        assert(AllCharactersFileLoader.LastTimestamp !== null);
     }
 }

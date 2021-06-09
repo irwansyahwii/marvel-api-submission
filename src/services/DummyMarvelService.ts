@@ -4,7 +4,7 @@ import { IMarvelService } from "./IMarvelService";
 
 @Service()
 export class DummyMarvelService implements IMarvelService {
-    GetAllCharactersIds(): Promise<string[]> {
+    GetAllCharactersIds(): Promise<number[]> {
         return Promise.resolve([]);
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
