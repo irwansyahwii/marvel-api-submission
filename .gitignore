@@ -52,3 +52,5 @@ test/**/*.js.map
 /public
 /dist
 production.env
+testch.json
+ts.json

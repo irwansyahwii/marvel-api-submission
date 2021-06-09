@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { IMarvelAPIResult } from "../services/IMarvelAPIResult"
 import { IMarvelAPIService } from "../services/IMarvelAPIService";
 import { IMarvelCharacterData } from "../services/IMarvelCharacterData";

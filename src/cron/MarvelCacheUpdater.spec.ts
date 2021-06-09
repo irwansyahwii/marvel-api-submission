@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { IOverwriteFileService } from "src/services/IOverwriteFileService";
 import { IMarvelAPIResult } from "src/services/IMarvelAPIResult";
 import { IMarvelAPIService } from "src/services/IMarvelAPIService"
