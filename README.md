@@ -8,6 +8,8 @@ See [Ts.ED](https://tsed.io) project for more information.
 
 > **Important!** Ts.ED requires Node >= 10, Express >= 4 and TypeScript >= 3.
 
+
+
 ```batch
 # install dependencies
 $ yarn install
@@ -28,6 +30,7 @@ The file will be loaded to the memory when the web server started. And every tim
 ## Cron Characters Downloader
 As stated in the **Caching Strategy** section, the cron needs to run first so it can download all the characters and save it to a file.
 
+Please put the `production.env` in the root directory so the cron can get the secret keys.
 ```batch
 # install ts-node globally
 $ npm install -g ts-node
