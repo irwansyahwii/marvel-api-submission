@@ -74,12 +74,9 @@ test('GetAllCharactersIds() when the cached timestamp has expired and the timest
     await s.GetAllCharactersIds();
 
     const data:IMarvelCharacterData[] = [
-        {id:1, name:"Heor1", description:"desc1", 
-            modified:new Date()}, 
-        {id:2, name: "Hero2", description: "Desc2", 
-            modified: new Date()},
-        {id:3, name: "Hero3", description: "Desc3", 
-            modified: new Date()}];
+        {id:1, name:"Heor1", description:"desc1"}, 
+        {id:2, name: "Hero2", description: "Desc2"},
+        {id:3, name: "Hero3", description: "Desc3"}];
 
     await CreateCacheFilesForTestingWithMoreParams("allcharstest.json", "tstest.json", 
         Timepoint.Now(), data);

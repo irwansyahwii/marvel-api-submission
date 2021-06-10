@@ -7,10 +7,8 @@ import { Timepoint } from "./Timepoint";
 
 export const CreateCacheFilesForTesting = async (allCharsFilePath:string, timestampFilePath:string):Promise<void>=>{
     const data:IMarvelCharacterData[] = [
-        {id:1, name:"Heor1", description:"desc1", 
-            modified:new Date()}, 
-        {id:2, name: "Hero2", description: "Desc2", 
-            modified: new Date()}];
+        {id:1, name:"Heor1", description:"desc1"}, 
+        {id:2, name: "Hero2", description: "Desc2"}];
 
     return CreateCacheFilesForTestingWithMoreParams(allCharsFilePath, timestampFilePath, Timepoint.Now(), data);
 }

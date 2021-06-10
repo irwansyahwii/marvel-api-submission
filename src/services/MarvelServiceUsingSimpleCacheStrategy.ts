@@ -79,8 +79,7 @@ export class MarvelServiceUsingSimpleCacheStrategy implements IMarvelService{
         const stripOut = {
             id: char.id,
             name: char.name,
-            description: char.description,
-            modified: char.modified
+            description: char.description
         }
 
 

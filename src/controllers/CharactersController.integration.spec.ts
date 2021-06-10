@@ -8,7 +8,7 @@ import { IFindAllCharactersResult, IGetCharacterByIdResult } from "./CharactersC
 describe("CharactersController", () => {
   let request: SuperTest.SuperTest<SuperTest.Test>;
 
-  
+  jest.setTimeout(10000);
 
   beforeEach(PlatformTest.bootstrap(Server));
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe("CharactersController", () => {
   afterEach(PlatformTest.reset);
 
   it("/characters should return all characters", async () => {
-    jest.setTimeout(10000);
+    
     await CreateCacheFilesForTesting(AllCharactersFilePath, LatestTimestampFilePath);
 
     const response = await request.get("/characters").expect(200);

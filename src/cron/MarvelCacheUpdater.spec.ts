@@ -133,7 +133,7 @@ test('Start() will overwrite two files consecutively', async ()=>{
     })
 
     const t:IMarvelAPIResult = {
-        data: [{id:1, name:"Heor1", description:"desc1", modified:new Date()}, {id:2, name: "Hero2", description: "Desc2", modified: new Date()}],
+        data: [{id:1, name:"Heor1", description:"desc1"}, {id:2, name: "Hero2", description: "Desc2"}],
         meta:{
             offset: 0,
             limit: 100,
@@ -190,7 +190,7 @@ test('Start() will log error when downloading characters failed', async ()=>{
     })
 
     const t:IMarvelAPIResult = {
-        data: [{id:1, name:"Heor1", description:"desc1", modified:new Date()}, {id:2, name: "Hero2", description: "Desc2", modified: new Date()}],
+        data: [{id:1, name:"Heor1", description:"desc1"}, {id:2, name: "Hero2", description: "Desc2"}],
         meta:{
             offset: 0,
             limit: 100,
