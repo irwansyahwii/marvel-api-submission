@@ -4,6 +4,9 @@ import { IMarvelService } from "./IMarvelService";
 
 @Service()
 export class DummyMarvelService implements IMarvelService {
+    InvalidateCache(): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
     GetAllCharactersIds(): Promise<number[]> {
         return Promise.resolve([]);
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { PlatformCache } from "@tsed/common";
 import { Inject, Service } from "@tsed/di";
 import { ICacheService } from "./ICacheService";

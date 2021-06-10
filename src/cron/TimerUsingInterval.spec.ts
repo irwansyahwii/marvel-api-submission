@@ -12,7 +12,7 @@ test('Stop() will stop the interval', async ()=>{
     }
 
     let callsCount = 0;
-    t.Start(()=>{
+    await t.Start(()=>{
         callsCount++;
         return Promise.resolve();
     });
@@ -53,7 +53,7 @@ test('Start() will call the callback function', async ()=>{
 
     const mockFn = jest.fn();
 
-    t.Start(mockFn);
+    await t.Start(mockFn);
 
     await delay();
 

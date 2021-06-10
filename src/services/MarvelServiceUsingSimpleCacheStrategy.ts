@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Service } from "@tsed/di";
 import { assert } from "console";
 import { AllCharactersFileLoader} from "./AllCharactersFileLoader";
+import { CacheServiceUsingPlatformCache } from "./CacheServiceUsingPlatformCache";
 import { ConfigurationService } from "./ConfigurationService";
-import { ICacheService } from "./ICacheService";
 import { IMarvelCharacterData } from "./IMarvelCharacterData";
 import { IMarvelService } from "./IMarvelService";
 
@@ -14,7 +15,7 @@ export class MarvelServiceUsingSimpleCacheStrategy implements IMarvelService{
 
     constructor(
         @Inject()
-        private _cache:ICacheService,
+        private _cache:CacheServiceUsingPlatformCache,
         @Inject()
         private _config:ConfigurationService
     ){
@@ -75,8 +76,15 @@ export class MarvelServiceUsingSimpleCacheStrategy implements IMarvelService{
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const char:IMarvelCharacterData = AllCharactersFileLoader.CacheData!.storage[index];
 
+        const stripOut = {
+            id: char.id,
+            name: char.name,
+            description: char.description,
+            modified: char.modified
+        }
 
-        return char;
+
+        return stripOut;
     }
 
 }

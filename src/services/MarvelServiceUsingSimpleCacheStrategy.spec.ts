@@ -27,7 +27,7 @@ test('GetAllCharactersIds() on the first run must invalidate the cache', async (
     await CreateCacheFilesForTesting("allcharstest.json", "tstest.json");
 
     
-    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService, mockConfig);
+    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService as any, mockConfig);
 
     await s.$beforeRoutesInit();
     const actual = await s.GetAllCharactersIds();
@@ -68,7 +68,7 @@ test('GetAllCharactersIds() when the cached timestamp has expired and the timest
     await CreateCacheFilesForTesting("allcharstest.json", "tstest.json");
 
     
-    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService, mockConfig);
+    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService as any, mockConfig);
 
     await s.$beforeRoutesInit();
     await s.GetAllCharactersIds();
@@ -114,7 +114,7 @@ test('GetAllCharactersIds() when the cached timestamp has expired and the timest
     await CreateCacheFilesForTesting("allcharstest.json", "tstest.json");
 
     
-    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService, mockConfig);
+    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService as any, mockConfig);
 
     await s.$beforeRoutesInit();
     await s.GetAllCharactersIds();
@@ -149,7 +149,7 @@ test('GetAllCharactersIds() when the characters cache is not exists must return 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     AllCharactersFileLoader.CacheData!.all_characters_ids = undefined as any;
     
-    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService, mockConfig);
+    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService as any, mockConfig);
 
     const actual = await s.GetAllCharactersIds();
 
@@ -178,7 +178,7 @@ test('GetCharacterById() on the first run must invalidate the cache', async ()=>
     await CreateCacheFilesForTesting("allcharstest.json", "tstest.json");
 
     
-    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService, mockConfig);
+    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService as any, mockConfig);
 
     await s.$beforeRoutesInit();
     const actual = await s.GetCharacterById(1);
@@ -214,7 +214,7 @@ test('GetCharacterById() when not found must return null', async ()=>{
     await CreateCacheFilesForTesting("allcharstest.json", "tstest.json");
 
     
-    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService, mockConfig);
+    const s:MarvelServiceUsingSimpleCacheStrategy = new MarvelServiceUsingSimpleCacheStrategy(mockCacheService as any, mockConfig);
 
     await s.$beforeRoutesInit();
     const actual = await s.GetCharacterById(111);
