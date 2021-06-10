@@ -1,4 +1,4 @@
 
 export interface IMarvelTimestampFormatRaw{
-    timestamp:{_date:Date}
+    timestamp:{_date:string}
 }

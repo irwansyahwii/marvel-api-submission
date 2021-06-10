@@ -1,4 +1,4 @@
-const isBefore = require("compare-dates").isBefore;
+import isBefore from 'date-fns/isBefore';
 
 export class Timepoint{
     static From(date: Date): Timepoint {

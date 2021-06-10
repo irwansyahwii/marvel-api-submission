@@ -1,7 +1,7 @@
 import {Controller, Get, PathParams} from "@tsed/common";
 import {  Summary } from "@tsed/schema";
 import { IMarvelCharacterData } from "../services/IMarvelCharacterData";
-import { MarvelServiceUsingPlatformCache } from "../services/MarvelServiceUsingPlatformCache";
+import { MarvelServiceUsingPlatformCache } from "../services/MarvelServiceUsingSimpleCacheStrategy";
 
 export interface IAPIResult{
     errors: string[];

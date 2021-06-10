@@ -1,6 +1,7 @@
 import { Inject, Service } from "@tsed/di";
 import { assert } from "console";
-import { AllCharactersFileLoader, AllCharactersFilePath, LatestTimestampFilePath } from "./AllCharactersFileLoader";
+import { AllCharactersFileLoader} from "./AllCharactersFileLoader";
+import { ConfigurationService } from "./ConfigurationService";
 import { ICacheService } from "./ICacheService";
 import { IMarvelCharacterData } from "./IMarvelCharacterData";
 import { IMarvelService } from "./IMarvelService";
@@ -13,7 +14,9 @@ export class MarvelServiceUsingSimpleCacheStrategy implements IMarvelService{
 
     constructor(
         @Inject()
-        private _cache:ICacheService
+        private _cache:ICacheService,
+        @Inject()
+        private _config:ConfigurationService
     ){
 
     }
@@ -25,17 +28,26 @@ export class MarvelServiceUsingSimpleCacheStrategy implements IMarvelService{
         return timestampDate;
     }
 
-    protected async InvalidateCache():Promise<void>{
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    async $beforeRoutesInit(): Promise<any> {
+        await AllCharactersFileLoader.LoadFiles(this._config.AllCharactersFilePath, this._config.LatestTimestampFilePath);
+        return this.InvalidateCache();
+    }    
+
+    public async InvalidateCache():Promise<void>{
         const timestampDate:Date | null = await this.GetTimestampFromCache();
         if(!timestampDate){
-            const lastTimeStamp = AllCharactersFileLoader.LastTimestamp;
-            await AllCharactersFileLoader.ReloadTimestamp(LatestTimestampFilePath);
+            assert(AllCharactersFileLoader.LastTimestamp !== null);
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            if(lastTimeStamp?.timestamp.IsOlderThan(AllCharactersFileLoader.LastTimestamp!.timestamp)){
-                await AllCharactersFileLoader.LoadFiles(AllCharactersFilePath, LatestTimestampFilePath);
+            const lastTimeStamp = AllCharactersFileLoader.LastTimestamp!;
+            await AllCharactersFileLoader.ReloadTimestamp(this._config.LatestTimestampFilePath);
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            if(lastTimeStamp.IsOlderThan(AllCharactersFileLoader.LastTimestamp!)){
+                await AllCharactersFileLoader.LoadFiles(this._config.AllCharactersFilePath, this._config.LatestTimestampFilePath);
             }
 
-            this._cache.Set(CHARS_TIME_STAMP_KEY, AllCharactersFileLoader.LastTimestamp?.timestamp.Date, {ttl:FIVE_MINUTES_TTL});
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            this._cache.Set(CHARS_TIME_STAMP_KEY, AllCharactersFileLoader.LastTimestamp!.Date, {ttl:FIVE_MINUTES_TTL});
         }
     }
 

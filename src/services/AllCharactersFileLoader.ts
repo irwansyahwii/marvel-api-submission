@@ -13,14 +13,14 @@ export const LatestTimestampFilePath = "latesttimestamp.json";
 export class AllCharactersFileLoader{
     
     public static CacheData:IMarvelCacheFormat | null = null;
-    public static LastTimestamp: IMarvelTimestampFormat | null = null;
+    public static LastTimestamp: Timepoint | null = null;
 
     public static async LoadFiles(charactersFilePath:string, timestampFilePath:string):Promise<void>{
 
         const allCharactersRaw = JSON.parse(await readTextFile.read(charactersFilePath)) as IMarvelCacheFormatRaw;
 
         const allCharacters:IMarvelCacheFormat = {
-            timestamp: Timepoint.From(allCharactersRaw.timestamp._date),
+            timestamp: Timepoint.From(new Date(allCharactersRaw.timestamp._date)),
             all_characters_ids: allCharactersRaw.all_characters_ids,
             characters_map_by_id: allCharactersRaw.characters_map_by_id,
             storage: allCharactersRaw.storage
@@ -37,11 +37,11 @@ export class AllCharactersFileLoader{
     public static async ReloadTimestamp(timestampFilePath:string):Promise<void>{
         const timestampRaw = JSON.parse(await readTextFile.read(timestampFilePath)) as IMarvelTimestampFormatRaw;
 
-        const timestamp:IMarvelTimestampFormat = {
-            timestamp: Timepoint.From(timestampRaw.timestamp._date)
+        const timestampInfo:IMarvelTimestampFormat = {
+            timestamp: Timepoint.From(new Date(timestampRaw.timestamp._date))
         }
 
-        AllCharactersFileLoader.LastTimestamp = timestamp;
+        AllCharactersFileLoader.LastTimestamp = timestampInfo.timestamp;
 
         assert(AllCharactersFileLoader.LastTimestamp !== undefined);
         assert(AllCharactersFileLoader.LastTimestamp !== null);

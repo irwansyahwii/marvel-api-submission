@@ -10,7 +10,6 @@ import "@tsed/ajv";
 import "@tsed/swagger";
 import {config, rootDir} from "./config";
 import { CharactersController } from "./controllers/CharactersController";
-// import {IndexCtrl} from "./controllers/pages/IndexController";
 
 
 
@@ -20,11 +19,7 @@ import { CharactersController } from "./controllers/CharactersController";
   httpPort: process.env.PORT || 8083,
   httpsPort: false, // CHANGE
   mount: {
-    // "/rest": [
-    //   `${rootDir}/controllers/**/*.ts`
-    // ],
     "/characters": [CharactersController]
-    // "/": [IndexCtrl]
   },
   swagger: [
     {
