@@ -1,7 +1,7 @@
-import {Controller, Get, PathParams} from "@tsed/common";
+import {Controller, Get, Inject, PathParams} from "@tsed/common";
 import {  Summary } from "@tsed/schema";
 import { IMarvelCharacterData } from "../services/IMarvelCharacterData";
-import { MarvelServiceUsingPlatformCache } from "../services/MarvelServiceUsingSimpleCacheStrategy";
+import { MarvelServiceUsingSimpleCacheStrategy } from "../services/MarvelServiceUsingSimpleCacheStrategy";
 
 export interface IAPIResult{
     errors: string[];
@@ -20,7 +20,7 @@ export interface IGetCharacterByIdResult extends IAPIResult{
 @Controller("/characters")
 export class CharactersController {
 
-    constructor(private _marvelService: MarvelServiceUsingPlatformCache){
+    constructor(@Inject() private _marvelService: MarvelServiceUsingSimpleCacheStrategy){
 
     }
 

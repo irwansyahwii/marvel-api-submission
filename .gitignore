@@ -54,3 +54,5 @@ test/**/*.js.map
 production.env
 testch.json
 ts.json
+allcharstest.json
+tstest.json
