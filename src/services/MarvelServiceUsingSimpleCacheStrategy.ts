@@ -1,7 +1,7 @@
-import { PlatformCache } from "@tsed/common";
 import { Inject, Service } from "@tsed/di";
 import { assert } from "console";
 import { AllCharactersFileLoader, AllCharactersFilePath, LatestTimestampFilePath } from "./AllCharactersFileLoader";
+import { ICacheService } from "./ICacheService";
 import { IMarvelCharacterData } from "./IMarvelCharacterData";
 import { IMarvelService } from "./IMarvelService";
 
@@ -9,17 +9,17 @@ const CHARS_TIME_STAMP_KEY = "CHARS_TIMESTAMP";
 const FIVE_MINUTES_TTL = 5*60*60*1000;
 
 @Service()
-export class MarvelServiceUsingPlatformCache implements IMarvelService{
+export class MarvelServiceUsingSimpleCacheStrategy implements IMarvelService{
 
     constructor(
         @Inject()
-        private _cache:PlatformCache
+        private _cache:ICacheService
     ){
 
     }
 
     protected async GetTimestampFromCache():Promise<Date | null>{
-        const timestampDate:Date | null = (await this._cache.get(CHARS_TIME_STAMP_KEY) || null) as Date;
+        const timestampDate:Date | null = (await this._cache.Get(CHARS_TIME_STAMP_KEY) || null) as Date;
 
 
         return timestampDate;
@@ -35,7 +35,7 @@ export class MarvelServiceUsingPlatformCache implements IMarvelService{
                 await AllCharactersFileLoader.LoadFiles(AllCharactersFilePath, LatestTimestampFilePath);
             }
 
-            this._cache.set(CHARS_TIME_STAMP_KEY, AllCharactersFileLoader.LastTimestamp?.timestamp.Date, {ttl:FIVE_MINUTES_TTL});
+            this._cache.Set(CHARS_TIME_STAMP_KEY, AllCharactersFileLoader.LastTimestamp?.timestamp.Date, {ttl:FIVE_MINUTES_TTL});
         }
     }
 

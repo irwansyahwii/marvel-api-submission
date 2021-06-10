@@ -1,0 +1,1 @@
+test('GetAllCharactersIds() ')
